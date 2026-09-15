@@ -1,0 +1,163 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Space Grotesk", ui-sans-serif, sans-serif;
+  --font-body: "Manrope", ui-sans-serif, sans-serif;
+
+  --color-ink: #060a17;
+  --color-ink-2: #0b1124;
+  --color-panel: #0f1730;
+  --color-panel-2: #131d3d;
+  --color-line: #24305c;
+  --color-fog: #eaeefc;
+  --color-mist: #8d97ba;
+  --color-dim: #5b6588;
+
+  --color-gold: #f6c453;
+  --color-ember: #f59e42;
+  --color-teal: #3fd8c2;
+  --color-rose: #fb7185;
+  --color-iris: #8f93f8;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-ink);
+  color: var(--color-fog);
+  background-image:
+    radial-gradient(1100px 620px at 85% -10%, rgba(63, 216, 194, 0.07), transparent 60%),
+    radial-gradient(900px 560px at -10% 15%, rgba(143, 147, 248, 0.09), transparent 60%),
+    radial-gradient(1000px 700px at 55% 115%, rgba(246, 196, 83, 0.06), transparent 60%);
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+::selection {
+  background: rgba(246, 196, 83, 0.35);
+  color: #fff;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background: #24305c;
+  border-radius: 999px;
+  border: 2px solid var(--color-ink);
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: #33417a;
+}
+
+/* ---------- panels ---------- */
+.panel {
+  background: linear-gradient(160deg, rgba(19, 29, 61, 0.72), rgba(11, 17, 36, 0.9));
+  border: 1px solid var(--color-line);
+  border-radius: 20px;
+  box-shadow: 0 18px 44px -24px rgba(0, 0, 0, 0.7);
+}
+
+.hairline {
+  border-color: var(--color-line);
+}
+
+/* ---------- 3D flip card ---------- */
+.flip-scene {
+  perspective: 1400px;
+}
+.flip-inner {
+  transform-style: preserve-3d;
+  transition: transform 0.62s cubic-bezier(0.22, 0.9, 0.28, 1.04);
+}
+.flip-inner.is-flipped {
+  transform: rotateY(180deg);
+}
+.flip-face {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.flip-back {
+  transform: rotateY(180deg);
+}
+
+/* ---------- motion ---------- */
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+.animate-floaty {
+  animation: floaty 5.5s ease-in-out infinite;
+}
+
+@keyframes pop-in {
+  0% { opacity: 0; transform: scale(0.92) translateY(10px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+.animate-pop {
+  animation: pop-in 0.45s cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+}
+
+@keyframes fade-up {
+  0% { opacity: 0; transform: translateY(16px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up {
+  animation: fade-up 0.6s ease both;
+}
+
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(63, 216, 194, 0.45); }
+  100% { box-shadow: 0 0 0 14px rgba(63, 216, 194, 0); }
+}
+.animate-pulse-ring {
+  animation: pulse-ring 1.8s ease-out infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.shimmer {
+  background: linear-gradient(100deg, rgba(246,196,83,0) 30%, rgba(246,196,83,0.5) 50%, rgba(246,196,83,0) 70%);
+  background-size: 200% 100%;
+  animation: shimmer 2.6s linear infinite;
+}
+
+@keyframes orbit-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-orbit {
+  animation: orbit-spin 14s linear infinite;
+}
+.animate-orbit-slow {
+  animation: orbit-spin 26s linear infinite reverse;
+}
+
+.btn-press {
+  transition: transform 0.15s ease, box-shadow 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+.btn-press:hover {
+  transform: translateY(-2px);
+}
+.btn-press:active {
+  transform: translateY(0) scale(0.97);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.8, 0.3, 1);
+}
+.reveal.is-in {
+  opacity: 1;
+  transform: translateY(0);
+}
